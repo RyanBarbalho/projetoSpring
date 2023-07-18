@@ -2,6 +2,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "CourseApplication",
+      "request": "launch",
+      "mainClass": "com.educandoweb.course.app.CourseApplication",
+      "projectName": "course"
+    },
+    {
+      "type": "java",
       "name": "Spring Boot-CourseApplication<course>",
       "request": "launch",
       "cwd": "${workspaceFolder}",
