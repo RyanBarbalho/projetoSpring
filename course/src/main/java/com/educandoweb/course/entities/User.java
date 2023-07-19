@@ -1,9 +1,15 @@
 package com.educandoweb.course.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +24,10 @@ public class User implements java.io.Serializable {
     private String email;
     private String phone;
     private String password;
+
+    @JsonIgnore // cliente não pode serializar os pedidos
+    @OneToMany(mappedBy = "client") // nome do atributo que está no outro lado da associação
+    private List<Order> orders = new ArrayList<>();
 
     public User() {
 
@@ -49,6 +59,10 @@ public class User implements java.io.Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     public void setEmail(String email) {
