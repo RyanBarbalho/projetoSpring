@@ -1,17 +1,13 @@
 package com.educandoweb.course.entities;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_order") // banco de dados H2 tem Order como palavra reservada
@@ -30,6 +26,10 @@ public class Order implements java.io.Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    //o id de ORDER que tem o pedido
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order() {
 
@@ -74,6 +74,10 @@ public class Order implements java.io.Serializable {
         if (orderStatus != null) {
             this.orderStatus = orderStatus.getCode();
         }
+    }
+
+    public Set<OrderItem> getItems(){
+        return items;
     }
 
     @Override
