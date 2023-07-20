@@ -22,7 +22,6 @@ public class Order implements java.io.Serializable {
 
     private Integer orderStatus;
 
-    // transformar isso pra chave estrangeira no banco de dados
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
