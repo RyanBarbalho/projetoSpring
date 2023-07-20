@@ -30,6 +30,9 @@ public class Order implements java.io.Serializable {
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)//produto do outro lado,
+    private Payment payment; //cascadetype.ALL = mapeando as duas pra ter o mesmo id
+
     public Order() {
 
     }
@@ -39,6 +42,14 @@ public class Order implements java.io.Serializable {
         this.moment = moment;
         setOrderStatus(orderStatus);
         this.client = client;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public Long getId() {
