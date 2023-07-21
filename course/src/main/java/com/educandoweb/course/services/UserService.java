@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.entities.User;
@@ -27,4 +28,8 @@ public class UserService {
         return obj.get();// retorna o objeto do tipo user que estiver dentro do optional
     }
 
+    public User insert(User obj){
+        return repository.save(obj);
+
+    }
 }
