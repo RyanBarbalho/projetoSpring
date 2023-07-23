@@ -3,6 +3,7 @@ package com.educandoweb.course.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class UserService {
     public User findById(Long id) {
         // optional = container que vai carregar o objeto do tipo user
         Optional<User> obj = repository.findById(id);
-        return obj.get();// retorna o objeto do tipo user que estiver dentro do optional
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));// retorna o objeto do tipo user que estiver dentro do optional
     }
 
     public User insert(User obj){
